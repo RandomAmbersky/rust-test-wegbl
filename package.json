@@ -4,6 +4,10 @@
   "main": "index.js",
   "author": "sir Random <random@amberskynet.org>",
   "license": "MIT",
+  "scripts": {
+    "build": "webpack --mode production",
+    "dev": "webpack-dev-server --port 9000 --open"
+  },
   "devDependencies": {
     "@wasm-tool/wasm-pack-plugin": "^1.2.0",
     "html-webpack-plugin": "^4.2.0",

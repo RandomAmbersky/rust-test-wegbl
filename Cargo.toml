@@ -1,0 +1,31 @@
+[package]
+name = "rust-test"
+version = "0.1.0"
+authors = ["Random Ambersky"]
+edition = "2018"
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+console_error_panic_hook = "*"
+js-sys = "*"
+lazy_static = "*"
+nalgebra = "*"
+wasm-bindgen = "*"
+
+[dependencies.web-sys]
+version = "*"
+features = [
+    'Document',
+    'Element',
+    'EventTarget',
+    'HtmlCanvasElement',
+    'MouseEvent',
+    'WebGlBuffer',
+    'WebGlProgram',
+    'WebGlRenderingContext',
+    'WebGlShader',
+    'WebGlUniformLocation',
+    'Window',
+]
