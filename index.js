@@ -34,8 +34,8 @@ rust.then(m => {
       }
 
       let elapsedTime = currTime - initialTime;
-      // amberNet.update(elapsedTime, window.innerHeight, window.innerWidth);
-      // amberNet.render();
+      amberNet.update(elapsedTime, window.innerHeight, window.innerWidth);
+      amberNet.render();
     }
   }
   render()

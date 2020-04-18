@@ -1,7 +1,7 @@
 extern crate wasm_bindgen;
 use wasm_bindgen::prelude::*;
 use web_sys::*;
-
+use web_sys::WebGlRenderingContext as GL;
 mod gl_setup;
 
 #[wasm_bindgen]
@@ -32,11 +32,11 @@ impl AmberSkyNet {
         }
     }
 
-    // pub fn update(&mut self, _time: f32, _height: f32, _width: f32) {
-    //
-    // }
-    //
-    // pub fn render(&self) {
-    //
-    // }
+    pub fn update(&mut self, _time: f32, _height: f32, _width: f32) -> Result<(), JsValue>{
+        Ok(())
+    }
+
+    pub fn render(&self) {
+        self.gl.clear(GL::COLOR_BUFFER_BIT | GL::DEPTH_BUFFER_BIT );
+    }
 }
