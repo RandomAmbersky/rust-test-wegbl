@@ -34,6 +34,7 @@ impl AmberSkyNet {
     pub fn new() -> Self {
         console_error_panic_hook::set_once();
         log("AmberSkyNet new");
+
         let gl = gl_setup::initialize_webgl_context().unwrap();
         let program_color_2d = programs::Color2D::new(&gl);
         Self {

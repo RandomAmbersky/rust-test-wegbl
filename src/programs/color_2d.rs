@@ -61,13 +61,15 @@ impl Color2D {
         gl.bind_buffer(GL::ARRAY_BUFFER, Some(&buffer_rect));
         gl.buffer_data_with_array_buffer_view(GL::ARRAY_BUFFER, &vert_array, GL::STATIC_DRAW);
 
+        cf::load_texture_image(&gl, "tiles.png");
+
         Self {
             u_color: gl.get_uniform_location(&program, "uColor").unwrap(),
             u_opacity: gl.get_uniform_location(&program, "uOpacity").unwrap(),
             u_transform: gl.get_uniform_location(&program, "uTransform").unwrap(),
             rect_vertice_ary_length: VERTICES_RECT.len(),
             rect_vertice_buffer: buffer_rect,
-            program: program,
+            program,
         }
     }
 

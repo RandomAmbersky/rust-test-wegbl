@@ -1,5 +1,6 @@
 use web_sys::*;
 use web_sys::WebGlRenderingContext as GL;
+// use web_sys::HtmlImageElement as HtmlImageElement;
 
 pub fn link_program(
     gl: &WebGlRenderingContext,
@@ -111,6 +112,7 @@ pub fn mult_matrix_4(a: [f32; 16], b: [f32; 16]) -> [f32; 16] {
     return_var
 }
 
-// pub fn load_texture_image(gl: &WebGlRenderingContext, src: &str) {
-//
-// }
+pub fn load_texture_image(_gl: &WebGlRenderingContext, _src: &str) {
+    let image = HtmlImageElement::new().unwrap();
+    image.set_src(_src);
+}
