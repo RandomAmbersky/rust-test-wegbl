@@ -14,13 +14,29 @@ pub struct Color2D {
     program: WebGlProgram,
 }
 
+pub const VERTEX_SHADER: &str = r#"
+    attribute vec4 aPosition;
+    uniform mat4 uTransform;
+
+    void main() {
+        gl_Position = uTransform * aPosition;
+    }
+"#;
+
+pub const FRAGMENT_SHADER: &str = r#"
+    precision mediump float;
+
+    uniform vec4 uColor;
+    uniform float uOpacity;
+
+    void main() {
+        gl_FragColor = vec4(uColor.r, uColor.g, uColor.b, uColor.a * uOpacity);
+    }
+"#;
+
 impl Color2D {
     pub fn new(gl: &WebGlRenderingContext) -> Self {
-        let program = cf::link_program(
-            &gl,
-            super::super::shaders::vertex::color_2d::SHADER,
-            super::super::shaders::fragment::color_2d::SHADER,
-        ).unwrap();
+        let program = cf::link_program(&gl, VERTEX_SHADER, FRAGMENT_SHADER).unwrap();
 
         let vertices_rect: [f32; 12] = [
             0., 1., // x, y

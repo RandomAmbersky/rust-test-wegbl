@@ -8,7 +8,6 @@ extern crate lazy_static;
 
 mod app_state;
 mod gl_setup;
-mod shaders;
 mod programs;
 mod common_funcs;
 
