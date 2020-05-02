@@ -1,7 +1,7 @@
 {
   "name": "rust-test",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "html/index.js",
   "author": "sir Random <random@amberskynet.org>",
   "license": "MIT",
   "scripts": {
