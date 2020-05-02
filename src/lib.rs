@@ -45,6 +45,8 @@ impl AmberSkyNet {
 
     pub fn update(&mut self, _time: f32, _height: f32, _width: f32) -> Result<(), JsValue>{
         app_state::update_dynamic_data(_time, _height, _width);
+        let log_msg = _time.to_string();
+        log(&log_msg);
         Ok(())
     }
 
