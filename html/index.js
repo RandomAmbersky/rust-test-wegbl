@@ -1,4 +1,4 @@
-const rust = import('./pkg')
+const rust = import('../pkg')
 const canvas = document.getElementById('rustCanvas');
 const gl = canvas.getContext("webgl", { antialias: true });
 
