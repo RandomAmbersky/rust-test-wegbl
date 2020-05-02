@@ -110,3 +110,7 @@ pub fn mult_matrix_4(a: [f32; 16], b: [f32; 16]) -> [f32; 16] {
 
     return_var
 }
+
+// pub fn load_texture_image(gl: &WebGlRenderingContext, src: &str) {
+//
+// }

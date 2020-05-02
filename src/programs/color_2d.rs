@@ -4,16 +4,6 @@ use web_sys::*;
 use js_sys::WebAssembly;
 use super::super::common_funcs as cf;
 
-// #[allow(dead_code)]
-pub struct Color2D {
-    u_color: WebGlUniformLocation,
-    u_opacity: WebGlUniformLocation,
-    u_transform: WebGlUniformLocation,
-    rect_vertice_ary_length: usize,
-    rect_vertice_buffer: WebGlBuffer,
-    program: WebGlProgram,
-}
-
 const VERTEX_SHADER: &str = r#"
     attribute vec4 aPosition;
     uniform mat4 uTransform;
@@ -42,6 +32,16 @@ const VERTICES_RECT: [f32; 12] = [
     0., 0., // x, y
     1., 0., // x, y
 ];
+
+// #[allow(dead_code)]
+pub struct Color2D {
+    u_color: WebGlUniformLocation,
+    u_opacity: WebGlUniformLocation,
+    u_transform: WebGlUniformLocation,
+    rect_vertice_ary_length: usize,
+    rect_vertice_buffer: WebGlBuffer,
+    program: WebGlProgram,
+}
 
 impl Color2D {
     pub fn new(gl: &WebGlRenderingContext) -> Self {
