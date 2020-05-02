@@ -14,7 +14,7 @@ pub struct Color2D {
     program: WebGlProgram,
 }
 
-pub const VERTEX_SHADER: &str = r#"
+const VERTEX_SHADER: &str = r#"
     attribute vec4 aPosition;
     uniform mat4 uTransform;
 
@@ -23,7 +23,7 @@ pub const VERTEX_SHADER: &str = r#"
     }
 "#;
 
-pub const FRAGMENT_SHADER: &str = r#"
+const FRAGMENT_SHADER: &str = r#"
     precision mediump float;
 
     uniform vec4 uColor;
@@ -34,28 +34,28 @@ pub const FRAGMENT_SHADER: &str = r#"
     }
 "#;
 
+const VERTICES_RECT: [f32; 12] = [
+    0., 1., // x, y
+    0., 0., // x, y
+    1., 1., // x, y
+    1., 1., // x, y
+    0., 0., // x, y
+    1., 0., // x, y
+];
+
 impl Color2D {
     pub fn new(gl: &WebGlRenderingContext) -> Self {
         let program = cf::link_program(&gl, VERTEX_SHADER, FRAGMENT_SHADER).unwrap();
-
-        let vertices_rect: [f32; 12] = [
-            0., 1., // x, y
-            0., 0., // x, y
-            1., 1., // x, y
-            1., 1., // x, y
-            0., 0., // x, y
-            1., 0., // x, y
-        ];
 
         let memory_buffer = wasm_bindgen::memory()
             .dyn_into::<WebAssembly::Memory>()
             .unwrap()
             .buffer();
 
-        let vertices_location = vertices_rect.as_ptr() as u32 / 4;
+        let vertices_location = VERTICES_RECT.as_ptr() as u32 / 4;
         let vert_array = js_sys::Float32Array::new(&memory_buffer).subarray(
             vertices_location,
-            vertices_location + vertices_rect.len() as u32,
+            vertices_location + VERTICES_RECT.len() as u32,
         );
         let buffer_rect = gl.create_buffer().ok_or("failed to create buffer").unwrap();
         gl.bind_buffer(GL::ARRAY_BUFFER, Some(&buffer_rect));
@@ -65,7 +65,7 @@ impl Color2D {
             u_color: gl.get_uniform_location(&program, "uColor").unwrap(),
             u_opacity: gl.get_uniform_location(&program, "uOpacity").unwrap(),
             u_transform: gl.get_uniform_location(&program, "uTransform").unwrap(),
-            rect_vertice_ary_length: vertices_rect.len(),
+            rect_vertice_ary_length: VERTICES_RECT.len(),
             rect_vertice_buffer: buffer_rect,
             program: program,
         }
@@ -89,9 +89,9 @@ impl Color2D {
 
         gl.uniform4f(
             Some(&self.u_color),
-            0., //r
-            0.5,//g
-            0.5,//b
+            0.9, //r
+            0.9,//g
+            0.9,//b
             1.0,//a
         );
 
