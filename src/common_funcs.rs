@@ -1,9 +1,13 @@
-use web_sys::*;
-use web_sys::WebGlRenderingContext as GL;
-// use web_sys::HtmlImageElement as HtmlImageElement;
+use web_sys::{
+    WebGlTexture,
+    WebGlShader,
+    WebGlRenderingContext as GL,
+    HtmlImageElement,
+    WebGlProgram
+};
 
 pub fn link_program(
-    gl: &WebGlRenderingContext,
+    gl: &GL,
     vert_source: &str,
     frag_source: &str,
 ) -> Result<WebGlProgram, String> {
@@ -27,7 +31,7 @@ pub fn link_program(
     gl.attach_shader(&program, &frag_shader);
     gl.link_program(&program);
 
-    if gl.get_program_parameter(&program, WebGlRenderingContext::LINK_STATUS)
+    if gl.get_program_parameter(&program, GL::LINK_STATUS)
         .as_bool()
         .unwrap_or(false)
     {
@@ -40,7 +44,7 @@ pub fn link_program(
 }
 
 fn compile_shader(
-    gl: &WebGlRenderingContext,
+    gl: &GL,
     shader_type: u32,
     source: &str,
 ) -> Result<WebGlShader, String> {
@@ -49,7 +53,7 @@ fn compile_shader(
         .ok_or_else(|| String::from("Error creating shader"))?;
     gl.shader_source(&shader, source);
     gl.compile_shader(&shader);
-    if gl.get_shader_parameter(&shader, WebGlRenderingContext::COMPILE_STATUS)
+    if gl.get_shader_parameter(&shader, GL::COMPILE_STATUS)
         .as_bool()
         .unwrap_or(false)
     {
@@ -112,7 +116,13 @@ pub fn mult_matrix_4(a: [f32; 16], b: [f32; 16]) -> [f32; 16] {
     return_var
 }
 
-pub fn load_texture_image(_gl: &WebGlRenderingContext, _src: &str) {
+pub fn load_texture_image(_gl: &GL, _src: &str) {
     let image = HtmlImageElement::new().unwrap();
-    image.set_src(_src);
+    let texture = _gl.create_texture();
 }
+
+// pub struct WglTexture {
+//     pub texture_data: WebGlTexture,
+//     pub w: i32,
+//     pub h: i32,
+// }

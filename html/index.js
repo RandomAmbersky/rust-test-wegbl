@@ -19,6 +19,7 @@ rust.then(m => {
     const currTime = Date.now();
 
     if (currTime >= lastDrawTime + FPS_THROTTLE) {
+      let elapsedTime = currTime - lastDrawTime;
       lastDrawTime = currTime;
 
       if (window.innerHeight !== canvas.height || window.innerWidth !== canvas.width) {
@@ -33,7 +34,7 @@ rust.then(m => {
         gl.viewport(0, 0, window.innerWidth, window.innerHeight);
       }
 
-      let elapsedTime = currTime - initialTime;
+      // let elapsedTime = currTime - initialTime;
       amberNet.update(elapsedTime, window.innerHeight, window.innerWidth);
       amberNet.render();
     }
