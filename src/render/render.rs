@@ -1,6 +1,8 @@
 use web_sys::WebGlRenderingContext as GL;
 
 use crate::render::gl_setup::get_webgl_context;
+// use crate::logger::log;
+use wasm_bindgen::JsValue;
 
 pub struct Render {
     gl: GL
@@ -8,7 +10,7 @@ pub struct Render {
 
 impl Render {
     pub fn new () -> Self {
-        let gl = get_webgl_context().unwrap();
+        let gl: GL = get_webgl_context().unwrap();
         gl.enable(GL::BLEND);
         gl.blend_func(GL::SRC_ALPHA, GL::ONE_MINUS_SRC_ALPHA);
         gl.clear_color(1.0, 1.0, 0.0, 1.0); //RGBA
