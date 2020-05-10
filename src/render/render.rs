@@ -1,22 +1,28 @@
+use std::rc::Rc;
 use web_sys::WebGlRenderingContext as GL;
-
-use crate::render::gl_setup::get_webgl_context;
-// use crate::logger::log;
-use wasm_bindgen::JsValue;
+use crate::render::gl_setup;
+use crate::render::gl_texture::Texture;
 
 pub struct Render {
-    gl: GL
+    gl: Rc<GL>,
+    tex: Texture
 }
 
 impl Render {
     pub fn new () -> Self {
-        let gl: GL = get_webgl_context().unwrap();
+
+        let gl_ctx: GL = gl_setup::get_webgl_context().unwrap();
+        let gl: Rc<GL> = Rc::new(gl_ctx);
+        let tex: Texture = Texture::new(gl.clone());
+
         gl.enable(GL::BLEND);
         gl.blend_func(GL::SRC_ALPHA, GL::ONE_MINUS_SRC_ALPHA);
         gl.clear_color(1.0, 1.0, 0.0, 1.0); //RGBA
         gl.clear_depth(1.0);
+
         Self {
-            gl
+            gl,
+            tex
         }
     }
     pub fn draw (&self) {

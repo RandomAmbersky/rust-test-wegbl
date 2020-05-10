@@ -21,7 +21,7 @@ impl AmberSkyNet {
     #[wasm_bindgen(constructor)]
     pub fn new() -> Self {
         console_error_panic_hook::set_once();
-        log("AmberSkyNet new");
+        log("AmberSkyNet new()");
 
         let render = render::Render::new();
         Self {

@@ -1,12 +1,12 @@
 const rust = import('../pkg')
 const canvas = document.getElementById('rustCanvas');
-const gl = canvas.getContext("webgl", { antialias: true });
+// const gl = canvas.getContext("webgl", { antialias: true });
 
 rust.then(m => {
-  if (!gl) {
-    alert('Failed to initialize WebGL');
-    return;
-  }
+  // if (!gl) {
+  //   alert('Failed to initialize WebGL');
+  //   return;
+  // }
 
   m.say_hello_from_rust()
   const FPS_THROTTLE = 1000.0 / 30.0; // milliseconds / frames
@@ -31,7 +31,7 @@ rust.then(m => {
         canvas.clientWidth = window.innerWidth;
         canvas.style.width = window.innerWidth;
 
-        gl.viewport(0, 0, window.innerWidth, window.innerHeight);
+        // gl.viewport(0, 0, window.innerWidth, window.innerHeight);
       }
 
       // let elapsedTime = currTime - initialTime;
