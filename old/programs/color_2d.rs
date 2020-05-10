@@ -44,7 +44,7 @@ pub struct Color2D {
 }
 
 impl Color2D {
-    pub fn new(gl: &WebGlRenderingContext) -> Self {
+    pub fn new(gl: &'static WebGlRenderingContext) -> Self {
         let program = cf::link_program(&gl, VERTEX_SHADER, FRAGMENT_SHADER).unwrap();
 
         let memory_buffer = wasm_bindgen::memory()
@@ -61,7 +61,7 @@ impl Color2D {
         gl.bind_buffer(GL::ARRAY_BUFFER, Some(&buffer_rect));
         gl.buffer_data_with_array_buffer_view(GL::ARRAY_BUFFER, &vert_array, GL::STATIC_DRAW);
 
-        cf::load_texture_image(&gl, "tiles.png");
+        // cf::load_texture_image(&gl, "tiles.png");
 
         Self {
             u_color: gl.get_uniform_location(&program, "uColor").unwrap(),

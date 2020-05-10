@@ -1,10 +1,12 @@
 use web_sys::{
-    WebGlTexture,
     WebGlShader,
     WebGlRenderingContext as GL,
-    HtmlImageElement,
-    WebGlProgram
-};
+    // HtmlImageElement,
+    WebGlProgram};
+// use std::cell::RefCell;
+// use std::rc::Rc;
+// use wasm_bindgen::prelude::*;
+// use wasm_bindgen::JsCast;
 
 pub fn link_program(
     gl: &GL,
@@ -116,10 +118,39 @@ pub fn mult_matrix_4(a: [f32; 16], b: [f32; 16]) -> [f32; 16] {
     return_var
 }
 
-pub fn load_texture_image(_gl: &GL, _src: &str) {
-    let image = HtmlImageElement::new().unwrap();
-    let texture = _gl.create_texture();
-}
+// pub fn load_texture_image(gl: &'static GL, src: &str) {
+//     let image = Rc::new(RefCell::new(HtmlImageElement::new().unwrap()));
+//
+//     let onload = Closure::wrap(Box::new(move || {
+//         let texture = gl.create_texture();
+//
+//         gl.active_texture(0);
+//
+//         gl.bind_texture(GL::TEXTURE_2D, texture.as_ref());
+//
+//         gl.pixel_storei(GL::UNPACK_FLIP_Y_WEBGL, 1);
+//
+//         gl.tex_parameteri(GL::TEXTURE_2D, GL::TEXTURE_MIN_FILTER, GL::NEAREST as i32);
+//         gl.tex_parameteri(GL::TEXTURE_2D, GL::TEXTURE_MAG_FILTER, GL::NEAREST as i32);
+//
+//         gl.tex_image_2d_with_u32_and_u32_and_image(
+//             GL::TEXTURE_2D,
+//             0,
+//             GL::RGBA as i32,
+//             GL::RGBA,
+//             GL::UNSIGNED_BYTE,
+//             &image.borrow(),
+//         )
+//             .expect("Texture image 2d");
+//     }) as Box<dyn Fn()>);
+//
+//     // let image = image.borrow_mut();
+//
+//     // image.set_onload(Some(onload.as_ref().unchecked_ref()));
+//     // image.set_src(src);
+//
+//     onload.forget();
+// }
 
 // pub struct WglTexture {
 //     pub texture_data: WebGlTexture,
