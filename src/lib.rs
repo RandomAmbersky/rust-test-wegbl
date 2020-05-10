@@ -1,13 +1,10 @@
 extern crate wasm_bindgen;
 use wasm_bindgen::prelude::*;
 
+mod logger;
 mod render;
 
-#[wasm_bindgen]
-extern "C" {
-    #[wasm_bindgen(js_namespace = console)]
-    fn log(s: &str);
-}
+use logger::log as log;
 
 #[wasm_bindgen]
 pub fn say_hello_from_rust() {
@@ -33,11 +30,11 @@ impl AmberSkyNet {
     }
 
     pub fn update(&mut self, _time: f32, _height: f32, _width: f32) {
-        log("AmberSkyNet update");
+        // log("AmberSkyNet update");
     }
 
     pub fn render(&self) {
         self.render_webgl.draw();
-        log("AmberSkyNet render");
+        // log("AmberSkyNet render");
     }
 }
