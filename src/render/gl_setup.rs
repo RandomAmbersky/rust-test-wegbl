@@ -11,6 +11,10 @@ pub fn get_webgl_context () -> Result<GL, JsValue> {
     let document: web_sys::Document = window.document().unwrap();
     let element: web_sys::Element = document.get_element_by_id("rustCanvas").unwrap();
     let canvas: web_sys::HtmlCanvasElement = element.dyn_into::<web_sys::HtmlCanvasElement>().unwrap();
-    let gl:WebGlRenderingContext = canvas.get_context("webgl")?.unwrap().dyn_into()?;
-    Ok(gl)
+
+    // let gl:WebGlRenderingContext = canvas.get_context("webgl")?.unwrap().dyn_into()?;
+    // пишу чтобы было понятнее потом %)
+    let gl_object: js_sys::Object = canvas.get_context("webgl")?.unwrap();
+    let gl_context:WebGlRenderingContext = gl_object.dyn_into()?;
+    Ok(gl_context)
 }
