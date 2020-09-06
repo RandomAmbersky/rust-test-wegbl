@@ -33,9 +33,11 @@ module.exports = (env, args) => {
       new WasmPackPlugin({
         crateDirectory: path.resolve(__dirname, '.')
       }),
-      new CopyWebpackPlugin([
-        { from: './html/*.png', flatten: true }
-      ]),
+      new CopyWebpackPlugin({
+        patterns: [
+          { from: './html/*.png', flatten: true }
+        ]
+      }),
       new webpack.ProvidePlugin({
         TextDecoder: ['text-encoding', 'TextDecoder'],
         TextEncoder: ['text-encoding', 'TextEncoder']
